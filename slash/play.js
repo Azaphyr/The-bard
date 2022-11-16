@@ -19,12 +19,15 @@ module.exports = {
 
         let url = interaction.options.getString("search")
 
-        if(url.match(/^https?:\/\/(www.youtube.com|www.youtube.com)\/playlist(.*)$/))
+        if(url.match("list"))
         {
+            console.log("youtube playlist")
+            console.log(url)
             const result = await client.player.search(url, {
                 requestedBy: interaction.user,
                 searchEngine: QueryType.YOUTUBE_PLAYLIST
             })
+            console.log(result)
             if (result.tracks.length === 0)
                     return interaction.editReply("No results")
                 
