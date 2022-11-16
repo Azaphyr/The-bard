@@ -46,7 +46,7 @@ module.exports = {
                 embed
                     .setDescription(`**[${song.title}](${song.url})**\n\n has been added to the queue`)
                     .setThumbnail(song.thumbnail)
-                    .setFooter({ text: `Duraction: ${song.duration}`})
+                    .setFooter({ text: `Duration: ${song.duration}`})
             }
             else if (interaction.options.getSubcommand() === "playlist") {
                 let url = interaction.options.getString("url")
@@ -78,7 +78,7 @@ module.exports = {
                 embed
                     .setDescription(`**[${song.title}](${song.url})**\n\n has been added to the queue`)
                     .setThumbnail(song.thumbnail)
-                    .setFooter({ text: `Duraction: ${song.duration}`})
+                    .setFooter({ text: `Duration: ${song.duration}`})
             }
             if (!queue.playing) await queue.play()
             await interaction.editReply({
