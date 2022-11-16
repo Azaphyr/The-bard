@@ -17,11 +17,13 @@ module.exports = {
             })
 
             const song = queue.current
+            const time = queuegetPlayerTimestamp()
 
             await interaction.editReply({
                 embeds: [new EmbedBuilder()
                 .setThumbnail(song.thumbnail)
-                .setDescription(`Currently Playing [${song.title}](${song.url})\n\n` + bar)
+                //.setDescription(`Currently Playing [${song.title}](${song.url})\n\n` + bar)
+                .setDescription(`🎶 | **${song.title}**! (\`${time.progress == 'Infinity' ? 'Live' : time.progress + '%'}\`)`)
             ],
             })
     },
