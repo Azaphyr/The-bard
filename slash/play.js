@@ -55,11 +55,41 @@ module.exports = {
         }
         else if (url.match(/^https?:\/\/(soundcloud.com|soundcloud.com)(.*)\/sets(.*)$/))
         {
-            return await interaction.editReply("Soundcloud playlist not handled yet !!! work in progress !!!")
+            
+            const result = await client.player.search(url, {
+                requestedBy: interaction.user,
+                searchEngine: QueryType.AUTO
+            })
+            if (result.tracks.length === 0)
+                return interaction.editReply("No results")
+            
+            const playlist = await result.playlist
+            await queue.addTracks(result.tracks)
+            embed
+                .setDescription(`**${result.tracks.length} songs from [${playlist.title}](${playlist.url})** have been added to the Queue`)
+                .setThumbnail(result.tracks[0].thumbnail)
+        }
+        else if (url.match("album"))
+        {
+            console.log("spotify ------>")
+            const result = await client.player.search(url, {
+                requestedBy: interaction.user,
+                searchEngine: QueryType.AUTO
+            })
+            console.log(result)
+            if (result.tracks.length === 0)
+                return interaction.editReply("No results")
+            
+            const playlist = await result.playlist
+            await queue.addTracks(result.tracks)
+            embed
+                .setDescription(`**${result.tracks.length} songs from [${playlist.title}](${playlist.url})** have been added to the Queue`)
+                .setThumbnail(result.tracks[0].thumbnail)
         }
         else if (url.match("bandcamp.com"))
         {
-            return await interaction.editReply("Bandcamp not handled yet !!! work in progress !!!")
+           
+            //return await interaction.editReply("Bandcamp not handled yet !!! work in progress !!!")
         }
         else{
             const result = await client.player.search(url, {
