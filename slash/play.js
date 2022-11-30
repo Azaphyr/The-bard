@@ -39,6 +39,7 @@ module.exports = {
         }
         else if (url.match("www.youtube.com"))
         {
+            console.log("here we go")
             const result = await client.player.search(url, {
                 requestedBy: interaction.user,
                 searchEngine: QueryType.YOUTUBE_VIDEO
@@ -47,6 +48,7 @@ module.exports = {
                 return interaction.editReply("No Result")
 
             const song = result.tracks[0]
+            console.log(song)
             await queue.addTrack(song)
             embed
                 .setDescription(`**[${song.title}](${song.url})**\n\n has been added to the queue`)
@@ -90,8 +92,22 @@ module.exports = {
         {
            
             //return await interaction.editReply("Bandcamp not handled yet !!! work in progress !!!")
+            // const result = await client.player.search(url, {
+            //     requestedBy: interaction.user,
+            //     searchEngine: QueryType.
+            // })
+            // if (result.tracks.length === 0)
+            //     return interaction.editReply("No Result")
+
+            // const song = result.tracks[0]
+            // await queue.addTrack(song)
+            // embed
+            //     .setDescription(`**[${song.title}](${song.url})**\n\n has been added to the queue`)
+            //     .setThumbnail(song.thumbnail)
+            //     .setFooter({ text: `Duration: ${song.duration}`})
         }
         else{
+            console.log("here we go2")
             const result = await client.player.search(url, {
                 requestedBy: interaction.user,
                 searchEngine: QueryType.AUTO
@@ -100,6 +116,7 @@ module.exports = {
                 return interaction.editReply("No Result")
 
             const song = result.tracks[0]
+            console.log(song)
             await queue.addTrack(song)
             embed
                 .setDescription(`**[${song.title}](${song.url})**\n\n has been added to the queue`)
